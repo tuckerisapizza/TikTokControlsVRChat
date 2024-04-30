@@ -1,12 +1,12 @@
 from TikTokLive import TikTokLiveClient
 from TikTokLive.events import CommentEvent, ConnectEvent, GiftEvent, FollowEvent
-
+import time
 from pythonosc.dispatcher import Dispatcher
 from pythonosc import osc_server, udp_client
 
 # FOR EASY SETUP, GO LIVE, REPLACE MY USERNAME WITH YOURS AND TOGGLE ON THE TTS COMPONENTS YOU WANT
 username = "@creamsicletucky" # REPLACE THIS WITH YOURS (RUN AFTER YOU GO LIVE)
-
+movementon = True
 # Instantiate's objects
 client: TikTokLiveClient = TikTokLiveClient(unique_id=username)
 
@@ -27,7 +27,29 @@ def sendmessages(message):
         client.send_message("/avatar/parameters/TiktokLive", 5)
     if message == "!fishnets":
         client.send_message("/avatar/parameters/TiktokLive", 6)
-      
+    if movementon:
+        if message == "!forward":
+            client.send_message("/input/MoveForward", 1)
+            time.sleep(1)
+            client.send_message("/input/MoveForward", 0)
+        if message == "!backward":
+            client.send_message("/input/MoveBackward", 1)
+            time.sleep(1)
+            client.send_message("/input/MoveBackward", 0)
+        if message == "!left":
+            client.send_message("/input/MoveLeft", 1)
+            time.sleep(1)
+            client.send_message("/input/MoveLeft", 0)
+        if message == "!right":
+            client.send_message("/input/MoveLeft", 1)
+            time.sleep(1)
+            client.send_message("/input/MoveLeft", 0)
+        if message == "!jump":
+            client.send_message("/input/Jump", 1)
+        
+        
+        
+    \
      # SENDS DATA TO VRCHAT OVER PARAMS FOCUS, FOCUSLEFT AND FOCUSRIGHT
     
   
